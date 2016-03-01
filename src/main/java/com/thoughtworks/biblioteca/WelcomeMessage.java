@@ -2,14 +2,15 @@ package com.thoughtworks.biblioteca;
 
 import java.io.PrintStream;
 
-public class WelcomePrinter {
-    PrintStream printStream;
+public class WelcomeMessage {
 
-    public WelcomePrinter(PrintStream printStream){
+    private PrintStream printStream;
+
+    public WelcomeMessage(PrintStream printStream){
         this.printStream = printStream;
     }
 
-    public void printGreeting() {
+    public void print() {
         printStream.println("Welcome to Biblioteca!");
     }
 }
