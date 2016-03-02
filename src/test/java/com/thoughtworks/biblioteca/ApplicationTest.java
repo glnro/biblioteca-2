@@ -17,9 +17,7 @@ public class ApplicationTest {
 
     @Before
     public void setUp() throws Exception {
-
         printStream = mock(PrintStream.class);
-
         library = mock(Library.class);
         application = new Application(printStream, library);
     }
@@ -27,7 +25,6 @@ public class ApplicationTest {
     @Test
     public void shouldPrintWelcomeMessageOnProgramStart(){
         application.start();
-
         verify(printStream).println(contains("Welcome to Biblioteca!"));
     }
 
@@ -36,4 +33,5 @@ public class ApplicationTest {
         application.start();
         verify(library).printBooks();
     }
+
 }
