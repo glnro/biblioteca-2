@@ -1,21 +1,19 @@
 package com.thoughtworks.biblioteca;
 
-import java.io.PrintStream;
+import java.util.Collection;
 
 
 public class Library {
 
-    private PrintStream printStream;
+    private Collection<Book> books;
 
-    public Library(PrintStream printStream) {
-        this.printStream = printStream;
+    public Library(Collection<Book> books) {
+        this.books = books;
     }
 
     public void printBooks() {
-        String[] books = {"book 1", "book 2"};
-
-        for(String book : books){
-            printStream.println(book);
+        for(Book book : books){
+            book.printBookDetails();
         }
     }
 }

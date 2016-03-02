@@ -1,31 +1,45 @@
 package com.thoughtworks.biblioteca;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 
 public class LibraryTest {
 
+    private Library library;
+    private Collection<Book> books;
+    private Book book;
+
+    @Before
+    public void setUp(){
+        books = new ArrayList<>();
+        library = new Library(books);
+
+        book = mock(Book.class);
+    }
 
     @Test
-    public void shouldPrintListOfBooksAfterWelcomeMessage(){
-        PrintStream printStream = mock(PrintStream.class);
-        Library library = new Library(printStream);
+    public void shouldPrintABook(){
+        books.add(book);
+        library.printBooks();
+        verify(book).printBookDetails();
+    }
+
+    @Test
+    public void ShouldPrintTwoBooksWhenGivenTwoBooks(){
+        Book book2 = mock(Book.class);
+        books.add(book);
+        books.add(book2);
 
         library.printBooks();
 
-        String[] books = {"book 1", "book 2"};
-
-        for(String book : books){
-            verify(printStream).println(book);
-        }
+        verify(book2).printBookDetails();
     }
-
 }
