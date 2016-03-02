@@ -19,7 +19,7 @@ public class Application {
     public void start() throws IOException {
         printStream.println("Welcome to Biblioteca!\n");
         menu.showMenu();
-        menu.getUserSelection();
-        library.printBooks();
+        int input = menu.getUserSelection();
+
     }
 }

@@ -14,7 +14,7 @@ public class Main {
         PrintStream printStream = System.out;
 
         BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(System.in)));
-        Menu menu = new Menu(printStream, bufferedReader);
+        Menu menu = new Menu(printStream, bufferedReader, );
         bookList.add(new Book(printStream, "Book one", "author", "year"));
 
         Library library = new Library(bookList);

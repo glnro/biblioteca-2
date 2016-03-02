@@ -9,7 +9,7 @@ public class Menu {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, Library library) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
     }
@@ -23,5 +23,9 @@ public class Menu {
     public int getUserSelection() throws IOException {
         String input = bufferedReader.readLine();
         return Integer.parseInt(input);
+    }
+
+    public void runSelection(Integer selection) {
+        // runs a menu method based on the user input
     }
 }

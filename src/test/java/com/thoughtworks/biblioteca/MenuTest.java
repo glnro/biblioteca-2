@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 import static org.mockito.Matchers.contains;
@@ -17,13 +16,15 @@ public class MenuTest {
     private PrintStream printStream;
     private Menu menu;
     private BufferedReader bufferedReader;
+    private Library library;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
+        library = mock(Library.class);
 
-        menu = new Menu(printStream, bufferedReader);
+        menu = new Menu(printStream, bufferedReader, library);
         menu.showMenu();
     }
 
@@ -43,4 +44,12 @@ public class MenuTest {
         menu.getUserSelection();
         verify(bufferedReader).readLine();
     }
+
+    @Test
+    public void shouldRunListBooksWhenUserInputIsOne() throws IOException {
+        when(menu.getUserSelection()).thenReturn(1);
+        menu.runSelection();
+        verify(library).printBooks();
+    }
+
 }
