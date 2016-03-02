@@ -14,24 +14,32 @@ public class ApplicationTest {
     private PrintStream printStream;
     private Application application;
     private Library library;
+    private Menu menu;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
         library = mock(Library.class);
-        application = new Application(printStream, library);
+        menu = mock(Menu.class);
+
+        application = new Application(printStream, library, menu);
+        application.start();
     }
 
     @Test
     public void shouldPrintWelcomeMessageOnProgramStart(){
-        application.start();
         verify(printStream).println(contains("Welcome to Biblioteca!"));
     }
 
     @Test
     public void shouldCallPrintBooksOnProgramStart(){
-        application.start();
         verify(library).printBooks();
+    }
+
+
+    @Test
+    public void shouldTellMenuToDisplay(){
+        verify(menu).showMenu();
     }
 
 }
