@@ -6,26 +6,45 @@ import java.io.PrintStream;
 
 public class Menu {
 
+    private boolean shouldQuit;
     private PrintStream printStream;
     private BufferedReader bufferedReader;
+    private Library library;
 
     public Menu(PrintStream printStream, BufferedReader bufferedReader, Library library) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
+        this.library = library;
+        this.shouldQuit = false;
     }
 
-    public void showMenu() {
+    public boolean shouldQuitGetter() {
+        return this.shouldQuit;
+    }
+
+    public void startMenu() throws IOException {
+        this.showMenu();
+        this.chooseOption();
+    }
+
+    private void showMenu() {
         printStream.println("Main Menu");
         printStream.println("Options (choose one):");
         printStream.println("1. List Books");
     }
 
-    public int getUserSelection() throws IOException {
+    private void chooseOption() throws IOException {
         String input = bufferedReader.readLine();
-        return Integer.parseInt(input);
-    }
-
-    public void runSelection(Integer selection) {
-        // runs a menu method based on the user input
+        if (input.equals("1")) {
+            library.printBooks();
+        } else if (input.equals("quit")) {
+            this.shouldQuit = true;
+            printStream.println("Thank you for using our Library!");
+        }
+        else {
+            printStream.println("Select a valid option!");
+        }
     }
 }
+
+// look up command design pattern

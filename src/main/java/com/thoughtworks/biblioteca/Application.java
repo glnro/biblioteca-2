@@ -18,8 +18,8 @@ public class Application {
 
     public void start() throws IOException {
         printStream.println("Welcome to Biblioteca!\n");
-        menu.showMenu();
-        int input = menu.getUserSelection();
-
+        while (!menu.shouldQuitGetter()) {
+            menu.startMenu();
+        }
     }
 }

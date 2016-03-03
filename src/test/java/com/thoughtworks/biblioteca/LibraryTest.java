@@ -19,7 +19,7 @@ public class LibraryTest {
 
     @Before
     public void setUp(){
-        books = new ArrayList<>();
+        books = new ArrayList<Book>();
         library = new Library(books);
 
         book = mock(Book.class);

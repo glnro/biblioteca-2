@@ -34,13 +34,8 @@ public class ApplicationTest {
     }
 
     @Test
-    public void shouldCallPrintBooksOnProgramStart(){
-        verify(library).printBooks();
-    }
-
-    @Test
-    public void shouldTellMenuToDisplay(){
-        verify(menu).showMenu();
+    public void shouldTellMenuToDisplay() throws IOException {
+        verify(menu).startMenu();
     }
 
 }

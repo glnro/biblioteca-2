@@ -16,6 +16,7 @@ public class Book {
     }
 
     public void printBookDetails(){
+
         printStream.println(String.format("%s  |  %s  |  %s", title, author, year));
     }
 

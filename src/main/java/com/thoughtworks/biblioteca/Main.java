@@ -10,14 +10,14 @@ import java.util.Collection;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Collection<Book> bookList = new ArrayList<>();
+        Collection<Book> bookList = new ArrayList<Book>();
         PrintStream printStream = System.out;
+        bookList.add(new Book(printStream, "Book one", "author", "year"));
+        Library library = new Library(bookList);
 
         BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(System.in)));
-        Menu menu = new Menu(printStream, bufferedReader, );
-        bookList.add(new Book(printStream, "Book one", "author", "year"));
+        Menu menu = new Menu(printStream, bufferedReader, library);
 
-        Library library = new Library(bookList);
 
         new Application(printStream, library, menu).start();
     }
