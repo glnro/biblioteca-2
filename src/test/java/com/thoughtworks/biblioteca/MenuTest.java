@@ -10,9 +10,7 @@ import java.io.PrintStream;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MenuTest {
     private PrintStream printStream;
@@ -56,12 +54,12 @@ public class MenuTest {
     public void shouldRunListBooksWhenInputIsOne() throws IOException {
         when(bufferedReader.readLine()).thenReturn("1");
         menu.startMenu();
-        verify(printBooksCommand).execute();
+        verify(printBooksCommand,atLeastOnce()).execute();
     }
 
     @Test
     public void shouldShowErrorMessageWhenNotGivenValidOptionSelection() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("asdf");
+        when(bufferedReader.readLine()).thenReturn("asdf","1");
         menu.startMenu();
         verify(printStream).println(contains("Select a valid option!"));
     }
@@ -70,7 +68,7 @@ public class MenuTest {
     public void shouldChangeShouldQuitToTrueWhenQuitIsInputted() throws IOException {
         when(bufferedReader.readLine()).thenReturn("2");
         menu.startMenu();
-        verify(quitCommand).execute();
+        verify(quitCommand,atLeastOnce()).execute();
     }
 
 }

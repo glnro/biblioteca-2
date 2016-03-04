@@ -3,6 +3,8 @@ package com.thoughtworks.biblioteca;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Menu {
 
@@ -10,12 +12,17 @@ public class Menu {
     private BufferedReader bufferedReader;
     private PrintBooksCommand printBooksCommand;
     private QuitCommand quitCommand;
+    private Map<String, Command> menuOptionDispatch;
 
     public Menu(PrintStream printStream, BufferedReader bufferedReader, PrintBooksCommand printBooksCommand, QuitCommand quitCommand) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
         this.printBooksCommand = printBooksCommand;
         this.quitCommand = quitCommand;
+        menuOptionDispatch = new HashMap<String, Command>();
+        menuOptionDispatch.put("1", printBooksCommand);
+        menuOptionDispatch.put("2", quitCommand);
+
     }
 
     public boolean hasBeenToldToQuit() {
@@ -37,7 +44,10 @@ public class Menu {
     }
 
     private void chooseOption() throws IOException {
-        String input = bufferedReader.readLine();
+
+        String input = getValidInput();
+        menuOptionDispatch.get(input).execute();
+
         if (input.equals("1")) {
             printBooksCommand.execute();
         } else if (input.equals("2")) {
@@ -48,4 +58,16 @@ public class Menu {
             printStream.println("Select a valid option!");
         }
     }
+
+    private String getValidInput() throws IOException {
+        String input = bufferedReader.readLine();
+
+        while (!menuOptionDispatch.containsKey(input)) {
+            printStream.println("Select a valid option!");
+            input = bufferedReader.readLine();
+        }
+
+        return input;
+    }
+
 }
