@@ -6,22 +6,20 @@ import java.io.PrintStream;
 
 public class Menu {
 
-    private boolean shouldQuit;
     private PrintStream printStream;
     private BufferedReader bufferedReader;
-    private Library library;
+    private PrintBooksCommand printBooksCommand;
     private QuitCommand quitCommand;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, Library library, QuitCommand quitCommand) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, PrintBooksCommand printBooksCommand, QuitCommand quitCommand) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
-        this.library = library;
+        this.printBooksCommand = printBooksCommand;
         this.quitCommand = quitCommand;
-        this.shouldQuit = false;
     }
 
-    public boolean shouldQuitGetter() {
-        return this.shouldQuit;
+    public boolean hasBeenToldToQuit() {
+        return quitCommand.getShouldQuit();
     }
 
     public void startMenu() throws IOException {
@@ -30,8 +28,10 @@ public class Menu {
     }
 
     private void showMenu() {
-        printStream.println("Main Menu");
-        printStream.println("Options (choose one):");
+        printStream.println(
+                "Main Menu\n" +
+                "Options (choose one):");
+
         printStream.println("1. List Books");
         printStream.println("2. Quit");
     }
@@ -39,10 +39,9 @@ public class Menu {
     private void chooseOption() throws IOException {
         String input = bufferedReader.readLine();
         if (input.equals("1")) {
-            library.execute();
+            printBooksCommand.execute();
         } else if (input.equals("2")) {
             quitCommand.execute();
-            this.shouldQuit = true;
             printStream.println("Thank you for using our Library!");
         }
         else {

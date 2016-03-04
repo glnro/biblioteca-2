@@ -16,7 +16,7 @@ public class Application {
 
     public void start() throws IOException {
         printStream.println("Welcome to Biblioteca!\n");
-        while (!menu.shouldQuitGetter()) {
+        while (!menu.hasBeenToldToQuit()) {
             menu.startMenu();
         }
     }

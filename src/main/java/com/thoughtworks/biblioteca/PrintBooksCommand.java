@@ -3,11 +3,11 @@ package com.thoughtworks.biblioteca;
 import java.util.Collection;
 
 
-public class Library implements Command {
+public class PrintBooksCommand implements Command {
 
     private Collection<Book> books;
 
-    public Library(Collection<Book> books) {
+    public PrintBooksCommand(Collection<Book> books) {
         this.books = books;
     }
 

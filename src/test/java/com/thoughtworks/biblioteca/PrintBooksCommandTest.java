@@ -3,7 +3,6 @@ package com.thoughtworks.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -11,16 +10,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 
-public class LibraryTest {
+public class PrintBooksCommandTest {
 
-    private Library library;
+    private PrintBooksCommand printBooksCommand;
     private Collection<Book> books;
     private Book book;
 
     @Before
     public void setUp(){
         books = new ArrayList<Book>();
-        library = new Library(books);
+        printBooksCommand = new PrintBooksCommand(books);
 
         book = mock(Book.class);
     }
@@ -28,7 +27,7 @@ public class LibraryTest {
     @Test
     public void shouldPrintABook(){
         books.add(book);
-        library.printBooks();
+        printBooksCommand.printBooks();
         verify(book).printBookDetails();
     }
 
@@ -38,7 +37,7 @@ public class LibraryTest {
         books.add(book);
         books.add(book2);
 
-        library.printBooks();
+        printBooksCommand.printBooks();
 
         verify(book2).printBookDetails();
     }

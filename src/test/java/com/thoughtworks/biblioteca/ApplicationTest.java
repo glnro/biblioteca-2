@@ -15,16 +15,16 @@ public class ApplicationTest {
 
     private PrintStream printStream;
     private Application application;
-    private Library library;
+    private PrintBooksCommand printBooksCommand;
     private Menu menu;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
-        library = mock(Library.class);
+        printBooksCommand = mock(PrintBooksCommand.class);
         menu = mock(Menu.class);
 
-        when(menu.shouldQuitGetter()).thenReturn(false, true);
+        when(menu.hasBeenToldToQuit()).thenReturn(false, true);
         application = new Application(printStream, menu);
         application.start();
     }

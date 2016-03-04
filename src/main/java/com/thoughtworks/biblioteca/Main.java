@@ -13,11 +13,11 @@ public class Main {
         Collection<Book> bookList = new ArrayList<Book>();
         PrintStream printStream = System.out;
         bookList.add(new Book(printStream, "Book one", "author", "year"));
-        Library library = new Library(bookList);
+        PrintBooksCommand printBooksCommand = new PrintBooksCommand(bookList);
         QuitCommand quitCommand = new QuitCommand();
 
         BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(System.in)));
-        Menu menu = new Menu(printStream, bufferedReader, library, quitCommand);
+        Menu menu = new Menu(printStream, bufferedReader, printBooksCommand, quitCommand);
 
         new Application(printStream, menu).start();
     }

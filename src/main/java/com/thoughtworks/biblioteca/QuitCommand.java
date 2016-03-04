@@ -6,7 +6,7 @@ public class QuitCommand implements Command{
 
     @Override
     public void execute() {
-
+        setShouldQuitToTrue();
     }
 
     public void setShouldQuitToTrue() {

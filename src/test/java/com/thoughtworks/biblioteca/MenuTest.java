@@ -18,17 +18,17 @@ public class MenuTest {
     private PrintStream printStream;
     private Menu menu;
     private BufferedReader bufferedReader;
-    private Library library;
+    private PrintBooksCommand printBooksCommand;
     private QuitCommand quitCommand;
 
     @Before
     public void setUp() throws IOException {
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
-        library = mock(Library.class);
+        printBooksCommand = mock(PrintBooksCommand.class);
         quitCommand = mock(QuitCommand.class);
 
-        menu = new Menu(printStream, bufferedReader, library, quitCommand);
+        menu = new Menu(printStream, bufferedReader, printBooksCommand, quitCommand);
     }
 
     @Test
@@ -56,11 +56,11 @@ public class MenuTest {
     public void shouldRunListBooksWhenInputIsOne() throws IOException {
         when(bufferedReader.readLine()).thenReturn("1");
         menu.startMenu();
-        verify(library).execute();
+        verify(printBooksCommand).execute();
     }
 
     @Test
-    public void shouldShowErrorMsgWhenNotGivenValidOptionSelection() throws IOException {
+    public void shouldShowErrorMessageWhenNotGivenValidOptionSelection() throws IOException {
         when(bufferedReader.readLine()).thenReturn("asdf");
         menu.startMenu();
         verify(printStream).println(contains("Select a valid option!"));
@@ -72,6 +72,5 @@ public class MenuTest {
         menu.startMenu();
         verify(quitCommand).execute();
     }
-
 
 }
