@@ -24,7 +24,8 @@ public class ApplicationTest {
         library = mock(Library.class);
         menu = mock(Menu.class);
 
-        application = new Application(printStream, library, menu);
+        when(menu.shouldQuitGetter()).thenReturn(false, true);
+        application = new Application(printStream, menu);
         application.start();
     }
 

@@ -10,11 +10,13 @@ public class Menu {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
     private Library library;
+    private QuitCommand quitCommand;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, Library library) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, Library library, QuitCommand quitCommand) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
         this.library = library;
+        this.quitCommand = quitCommand;
         this.shouldQuit = false;
     }
 
@@ -31,13 +33,15 @@ public class Menu {
         printStream.println("Main Menu");
         printStream.println("Options (choose one):");
         printStream.println("1. List Books");
+        printStream.println("2. Quit");
     }
 
     private void chooseOption() throws IOException {
         String input = bufferedReader.readLine();
         if (input.equals("1")) {
-            library.printBooks();
-        } else if (input.equals("quit")) {
+            library.execute();
+        } else if (input.equals("2")) {
+            quitCommand.execute();
             this.shouldQuit = true;
             printStream.println("Thank you for using our Library!");
         }
@@ -46,5 +50,3 @@ public class Menu {
         }
     }
 }
-
-// look up command design pattern

@@ -3,7 +3,7 @@ package com.thoughtworks.biblioteca;
 import java.util.Collection;
 
 
-public class Library {
+public class Library implements Command {
 
     private Collection<Book> books;
 
@@ -15,5 +15,10 @@ public class Library {
         for(Book book : books){
             book.printBookDetails();
         }
+    }
+
+    @Override
+    public void execute() {
+        printBooks();
     }
 }

@@ -6,12 +6,10 @@ import java.io.PrintStream;
 public class Application {
 
 
-    private Library library;
     private PrintStream printStream;
     private Menu menu;
 
-    public Application(PrintStream printStream, Library library, Menu menu) {
-        this.library = library;
+    public Application(PrintStream printStream, Menu menu) {
         this.printStream = printStream;
         this.menu = menu;
     }

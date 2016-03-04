@@ -19,14 +19,16 @@ public class MenuTest {
     private Menu menu;
     private BufferedReader bufferedReader;
     private Library library;
+    private QuitCommand quitCommand;
 
     @Before
     public void setUp() throws IOException {
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
         library = mock(Library.class);
+        quitCommand = mock(QuitCommand.class);
 
-        menu = new Menu(printStream, bufferedReader, library);
+        menu = new Menu(printStream, bufferedReader, library, quitCommand);
     }
 
     @Test
@@ -44,10 +46,17 @@ public class MenuTest {
     }
 
     @Test
+    public void shouldShowQuitOption() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("1");
+        menu.startMenu();
+        verify(printStream).println(contains("Quit"));
+    }
+
+    @Test
     public void shouldRunListBooksWhenInputIsOne() throws IOException {
         when(bufferedReader.readLine()).thenReturn("1");
         menu.startMenu();
-        verify(library).printBooks();
+        verify(library).execute();
     }
 
     @Test
@@ -59,9 +68,9 @@ public class MenuTest {
 
     @Test
     public void shouldChangeShouldQuitToTrueWhenQuitIsInputted() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("quit");
+        when(bufferedReader.readLine()).thenReturn("2");
         menu.startMenu();
-        assertThat(menu.shouldQuitGetter(), is(true));
+        verify(quitCommand).execute();
     }
 
 
