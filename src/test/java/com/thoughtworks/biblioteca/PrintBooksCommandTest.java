@@ -12,33 +12,15 @@ import static org.mockito.Mockito.verify;
 
 public class PrintBooksCommandTest {
 
-    private PrintBooksCommand printBooksCommand;
-    private Collection<Book> books;
-    private Book book;
-
-    @Before
-    public void setUp(){
-        books = new ArrayList<Book>();
-        printBooksCommand = new PrintBooksCommand(books);
-
-        book = mock(Book.class);
-    }
-
     @Test
-    public void shouldPrintABook(){
-        books.add(book);
-        printBooksCommand.printBooks();
-        verify(book).printBookDetails();
+    public void shouldRunListBooksOnExecute(){
+        Library library = mock(Library.class);
+        PrintBooksCommand printBooksCommand = new PrintBooksCommand(library);
+
+        printBooksCommand.execute();
+
+        verify(library).printBooks();
     }
 
-    @Test
-    public void ShouldPrintTwoBooksWhenGivenTwoBooks(){
-        Book book2 = mock(Book.class);
-        books.add(book);
-        books.add(book2);
 
-        printBooksCommand.printBooks();
-
-        verify(book2).printBookDetails();
-    }
 }

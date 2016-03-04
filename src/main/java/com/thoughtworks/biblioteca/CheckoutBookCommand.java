@@ -1,14 +1,14 @@
 package com.thoughtworks.biblioteca;
 
-public class PrintBooksCommand implements Command {
+public class CheckoutBookCommand implements Command {
     private Library library;
 
-    public PrintBooksCommand(Library library) {
+    public CheckoutBookCommand(Library library) {
         this.library = library;
     }
 
     @Override
     public void execute() {
-        library.printBooks();
+        library.checkoutBook();
     }
 }

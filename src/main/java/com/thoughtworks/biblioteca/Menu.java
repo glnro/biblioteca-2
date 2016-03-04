@@ -10,19 +10,24 @@ public class Menu {
 
     private PrintStream printStream;
     private BufferedReader bufferedReader;
-    private PrintBooksCommand printBooksCommand;
     private QuitCommand quitCommand;
     private Map<String, Command> menuOptionDispatch;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, PrintBooksCommand printBooksCommand, QuitCommand quitCommand) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, QuitCommand quitCommand, Command[] commands) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
-        this.printBooksCommand = printBooksCommand;
         this.quitCommand = quitCommand;
-        menuOptionDispatch = new HashMap<String, Command>();
-        menuOptionDispatch.put("1", printBooksCommand);
-        menuOptionDispatch.put("2", quitCommand);
 
+        createCommandDispatch(commands);
+
+    }
+
+    private void createCommandDispatch(Command[] commands) {
+        menuOptionDispatch = new HashMap<String, Command>();
+        for(int i=0; i<commands.length; i++){
+            String key = String.valueOf(i + 1);
+            menuOptionDispatch.put(key, commands[i]);
+        }
     }
 
     public boolean hasBeenToldToQuit() {
@@ -40,7 +45,8 @@ public class Menu {
                 "Options (choose one):");
 
         printStream.println("1. List Books");
-        printStream.println("2. Quit");
+        printStream.println("2. Checkout Book");
+        printStream.println("3. Quit");
     }
 
     private void chooseOption() throws IOException {

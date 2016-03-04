@@ -24,12 +24,6 @@ public class QuitCommandTest {
     }
 
     @Test
-    public void shouldStartWithValueOfFalse(){
-        quitCommand.setShouldQuitToTrue();
-        assertTrue(quitCommand.getShouldQuit());
-    }
-
-    @Test
     public void shouldSayThankYouOnProgramExit() {
         quitCommand.execute();
         verify(printStream).println(contains("Thank you for using our Library!"));

@@ -18,15 +18,19 @@ public class MenuTest {
     private BufferedReader bufferedReader;
     private PrintBooksCommand printBooksCommand;
     private QuitCommand quitCommand;
+    private CheckoutBookCommand checkoutBookCommand;
 
     @Before
     public void setUp() throws IOException {
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
         printBooksCommand = mock(PrintBooksCommand.class);
+        checkoutBookCommand = mock(CheckoutBookCommand.class);
         quitCommand = mock(QuitCommand.class);
 
-        menu = new Menu(printStream, bufferedReader, printBooksCommand, quitCommand);
+        Command[] commands = {printBooksCommand, checkoutBookCommand, quitCommand};
+
+        menu = new Menu(printStream, bufferedReader, quitCommand, commands);
     }
 
     @Test
@@ -34,27 +38,30 @@ public class MenuTest {
         when(bufferedReader.readLine()).thenReturn("1");
         menu.startMenu();
         verify(printStream).println(contains("Main Menu"));
-    }
-
-    @Test
-    public void shouldShowListBooksOption() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("1");
-        menu.startMenu();
         verify(printStream).println(contains("List Books"));
-    }
-
-    @Test
-    public void shouldShowQuitOption() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("1");
-        menu.startMenu();
         verify(printStream).println(contains("Quit"));
+        verify(printStream).println(contains("Checkout Book"));
     }
 
     @Test
-    public void shouldRunListBooksWhenInputIsOne() throws IOException {
+    public void shouldRunPrintBooksCommandWhenInputIsOne() throws IOException {
         when(bufferedReader.readLine()).thenReturn("1");
         menu.startMenu();
-        verify(printBooksCommand,atLeastOnce()).execute();
+        verify(printBooksCommand).execute();
+    }
+
+    @Test
+    public void shouldRunCheckoutBookCommandWhenInputIsTwo() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("2", "3");
+        menu.startMenu();
+        verify(checkoutBookCommand).execute();
+    }
+
+    @Test
+    public void shouldRunQuitCommandWhenInputIsThree() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("3");
+        menu.startMenu();
+        verify(quitCommand).execute();
     }
 
     @Test
@@ -63,12 +70,4 @@ public class MenuTest {
         menu.startMenu();
         verify(printStream).println(contains("Select a valid option!"));
     }
-
-    @Test
-    public void shouldChangeShouldQuitToTrueWhenQuitIsInputted() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("2");
-        menu.startMenu();
-        verify(quitCommand,atLeastOnce()).execute();
-    }
-
 }
