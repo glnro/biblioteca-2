@@ -14,7 +14,7 @@ public class Main {
         PrintStream printStream = System.out;
         bookList.add(new Book(printStream, "Book one", "author", "year"));
         PrintBooksCommand printBooksCommand = new PrintBooksCommand(bookList);
-        QuitCommand quitCommand = new QuitCommand();
+        QuitCommand quitCommand = new QuitCommand(printStream);
 
         BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(System.in)));
         Menu menu = new Menu(printStream, bufferedReader, printBooksCommand, quitCommand);

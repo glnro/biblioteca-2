@@ -47,16 +47,6 @@ public class Menu {
 
         String input = getValidInput();
         menuOptionDispatch.get(input).execute();
-
-        if (input.equals("1")) {
-            printBooksCommand.execute();
-        } else if (input.equals("2")) {
-            quitCommand.execute();
-            printStream.println("Thank you for using our Library!");
-        }
-        else {
-            printStream.println("Select a valid option!");
-        }
     }
 
     private String getValidInput() throws IOException {
