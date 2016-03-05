@@ -5,9 +5,11 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class BookTest {
@@ -37,6 +39,14 @@ public class BookTest {
     public void shouldPrintBookYear(){
         book.printBookDetails();
         verify(printStream).println(contains("Year 1"));
+    }
+
+    @Test
+    public void shouldNotPrintWhenCheckedOut(){
+        book.checkout();
+        book.printBookDetails();
+
+        verify(printStream,never()).println(contains("Year 1"));
     }
 
 }

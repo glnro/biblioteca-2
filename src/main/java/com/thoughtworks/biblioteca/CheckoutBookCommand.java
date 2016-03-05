@@ -9,6 +9,6 @@ public class CheckoutBookCommand implements Command {
 
     @Override
     public void execute() {
-        library.checkoutBook();
+        library.startCheckoutBookProcess();
     }
 }

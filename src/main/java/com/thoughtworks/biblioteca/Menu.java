@@ -50,7 +50,6 @@ public class Menu {
     }
 
     private void chooseOption() throws IOException {
-
         String input = getValidInput();
         menuOptionDispatch.get(input).execute();
     }
