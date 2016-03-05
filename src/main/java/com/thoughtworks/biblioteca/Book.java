@@ -9,6 +9,7 @@ public class Book {
     private String year;
     private boolean isAvailable;
 
+
     public Book(PrintStream printStream, String title, String author, String year) {
         this.printStream = printStream;
         this.title = title;
@@ -19,11 +20,13 @@ public class Book {
 
     public void printBookDetails(){
         if(isAvailable){
-            printStream.println(String.format("%s  |  %s  |  %s", title, author, year));
+            printStream.println(String.format(" %s  |  %s  |  %s", title, author, year));
         }
     }
 
     public void checkout() {
         isAvailable = false;
     }
+
+
 }

@@ -24,11 +24,17 @@ public class BookTest {
     }
 
     @Test
+    public void shouldFormatBookWithNumberWhenPrintingFirstBook(){
+        book.printBookDetails();
+        verify(printStream).println(contains("Book 1"));
+    }
+
+    @Test
     public void shouldPrintBookTitle(){
         book.printBookDetails();
         verify(printStream).println(contains("Book 1"));
     }
-    
+
     @Test
     public void shouldPrintBookAuthor(){
         book.printBookDetails();
@@ -40,7 +46,6 @@ public class BookTest {
         book.printBookDetails();
         verify(printStream).println(contains("Year 1"));
     }
-
     @Test
     public void shouldNotPrintWhenCheckedOut(){
         book.checkout();
@@ -48,5 +53,4 @@ public class BookTest {
 
         verify(printStream,never()).println(contains("Year 1"));
     }
-
 }

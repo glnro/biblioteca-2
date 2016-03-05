@@ -6,9 +6,7 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
@@ -17,25 +15,29 @@ import static org.mockito.Mockito.when;
 
 public class LibraryTest {
     private Library library;
-    private List<Book> books;
     private Book book1;
     private Book book2;
     private BufferedReader reader;
     private PrintStream printStream;
+    private Map<String, Book> books;
 
     @Before
     public void setUp() throws IOException {
-        books = new ArrayList<Book>();
         reader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
+        books = new HashMap<String, Book>();
         when(reader.readLine()).thenReturn("1");
 
-        library = new Library(books,reader,printStream);
-
+        library = new Library(reader, printStream, books);
 
         book1 = mock(Book.class);
         book2 = mock(Book.class);
-        addTwoBooksToBookArray();
+        addTwoBooksToBookMap();
+    }
+
+    private void addTwoBooksToBookMap() {
+        books.put("1", book1);
+        books.put("2", book2);
     }
 
     @Test
@@ -92,11 +94,11 @@ public class LibraryTest {
         verify(printStream).println(contains("Thank You! Enjoy the book!"));
     }
 
+    @Test
+    public void shouldPrintBookListWhenCheckoutStarts(){
+        library.startCheckoutBookProcess();
 
-
-    private void addTwoBooksToBookArray() {
-        books.add(book1);
-        books.add(book2);
+        verify(book1).printBookDetails();
     }
 
 }

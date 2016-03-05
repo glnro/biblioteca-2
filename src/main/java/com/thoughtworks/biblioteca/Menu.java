@@ -27,6 +27,7 @@ public class Menu {
 
     private void createCommandDispatch(Command[] commands) {
         menuOptionDispatch = new HashMap<String, Command>();
+
         for(int i=0; i<commands.length; i++){
             String key = String.valueOf(i + 1);
             menuOptionDispatch.put(key, commands[i]);
