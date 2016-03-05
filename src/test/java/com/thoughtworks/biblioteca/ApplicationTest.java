@@ -17,15 +17,18 @@ public class ApplicationTest {
     private Application application;
     private PrintBooksCommand printBooksCommand;
     private Menu menu;
+    private IsRunning isRunning;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
         printBooksCommand = mock(PrintBooksCommand.class);
         menu = mock(Menu.class);
+        isRunning = mock(IsRunning.class);
 
-        when(menu.hasBeenToldToQuit()).thenReturn(false, true);
-        application = new Application(printStream, menu);
+        when(isRunning.isRunning()).thenReturn(true, false);
+
+        application = new Application(printStream, menu, isRunning);
         application.start();
     }
 

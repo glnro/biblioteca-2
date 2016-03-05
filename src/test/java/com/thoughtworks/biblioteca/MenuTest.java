@@ -30,7 +30,7 @@ public class MenuTest {
 
         Command[] commands = {printBooksCommand, checkoutBookCommand, quitCommand};
 
-        menu = new Menu(printStream, bufferedReader, quitCommand, commands);
+        menu = new Menu(printStream, bufferedReader, commands);
     }
 
     @Test

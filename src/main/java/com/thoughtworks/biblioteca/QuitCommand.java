@@ -2,26 +2,24 @@ package com.thoughtworks.biblioteca;
 
 import java.io.PrintStream;
 
-public class QuitCommand implements Command{
+public class QuitCommand implements Command, IsRunning {
 
-    private boolean shouldQuit = false;
+    private boolean isRunning;
     private PrintStream printStream;
 
     public QuitCommand(PrintStream printStream) {
+        this.isRunning = true;
         this.printStream = printStream;
     }
 
     @Override
     public void execute() {
-        setShouldQuitToTrue();
+        isRunning = false;
         printStream.println("Thank you for using our Library!");
     }
 
-    private void setShouldQuitToTrue() {
-        shouldQuit = true;
-    }
-
-    public boolean getShouldQuit() {
-        return shouldQuit;
+    @Override
+    public boolean isRunning() {
+        return isRunning;
     }
 }

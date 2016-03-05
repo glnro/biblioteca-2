@@ -10,19 +10,18 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        List<Book> bookList = new ArrayList<Book>();
         PrintStream printStream = System.out;
         BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(System.in)));
+
+        List<Book> bookList = new ArrayList<Book>();
         bookList.add(new Book(printStream, "Book one", "author", "year"));
+        Library library =  new Library(bookList, bufferedReader, printStream);
 
         QuitCommand quitCommand = new QuitCommand(printStream);
-        Library library =  new Library(bookList, bufferedReader, printStream);
         Command[] commands = {new PrintBooksCommand(library), new CheckoutBookCommand(library), quitCommand};
+        Menu menu = new Menu(printStream, bufferedReader, commands);
 
-
-        Menu menu = new Menu(printStream, bufferedReader, quitCommand, commands);
-
-        new Application(printStream, menu).start();
+        new Application(printStream, menu, quitCommand).start();
     }
 
 }

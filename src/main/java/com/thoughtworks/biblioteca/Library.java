@@ -18,26 +18,32 @@ public class Library {
         this.printStream = printStream;
     }
 
-
     public void startCheckoutBookProcess() {
         printStream.println("Please enter the book number you would like to checkout");
-        try {
-            String bookChoice = reader.readLine();
-            checkoutBook(bookChoice);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        checkoutBook(getBookChoiceFromUser());
         printStream.println("Thank You! Enjoy the book!");
     }
 
-    private void checkoutBook(String bookMenuNumber) {
-        int bookIndex = Integer.valueOf(bookMenuNumber) - 1;
-        books.get(bookIndex).checkout();
+    private String getBookChoiceFromUser() {
+        String bookChoice = "";
+
+        try {
+            bookChoice = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return bookChoice;
     }
 
     public void printBooks() {
         for(Book book : books){
             book.printBookDetails();
         }
+    }
+
+    private void checkoutBook(String bookMenuNumber) {
+        int bookIndex = Integer.valueOf(bookMenuNumber) - 1;
+        books.get(bookIndex).checkout();
     }
 }

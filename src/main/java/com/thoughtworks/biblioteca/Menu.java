@@ -10,16 +10,19 @@ public class Menu {
 
     private PrintStream printStream;
     private BufferedReader bufferedReader;
-    private QuitCommand quitCommand;
     private Map<String, Command> menuOptionDispatch;
 
-    public Menu(PrintStream printStream, BufferedReader bufferedReader, QuitCommand quitCommand, Command[] commands) {
+    public Menu(PrintStream printStream, BufferedReader bufferedReader, Command[] commands) {
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
-        this.quitCommand = quitCommand;
 
         createCommandDispatch(commands);
 
+    }
+
+    public void startMenu() throws IOException {
+        this.showMenu();
+        this.chooseOption();
     }
 
     private void createCommandDispatch(Command[] commands) {
@@ -28,15 +31,6 @@ public class Menu {
             String key = String.valueOf(i + 1);
             menuOptionDispatch.put(key, commands[i]);
         }
-    }
-
-    public boolean hasBeenToldToQuit() {
-        return quitCommand.getShouldQuit();
-    }
-
-    public void startMenu() throws IOException {
-        this.showMenu();
-        this.chooseOption();
     }
 
     private void showMenu() {
